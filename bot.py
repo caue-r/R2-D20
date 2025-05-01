@@ -23,7 +23,7 @@ async def iniciar_iniciativa(ctx):
     global escutando_iniciativas, iniciativas
     iniciativas = []  # limpa a lista
     escutando_iniciativas = True
-    await ctx.send("📝 R2-D20 está escutando as iniciativas! Use `Di+X Nome`, `Vi+X Nome` ou `i+X Nome`. Encerre com `!stop`.")
+    await ctx.send("📝 R2-D20 está escutando as iniciativas! Use `D+X Nome`, `V+X Nome` ou `i+X Nome`. Encerre com `!stop`.")
 
 
 @bot.command(name='stop')
