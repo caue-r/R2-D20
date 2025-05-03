@@ -66,10 +66,10 @@ pip install -r requirements.txt
 
 ### 5. Defina o Token do Bot no Código
 
-Abra o arquivo bot.py no editor de sua escolha. No arquivo, você verá uma linha onde o token do bot é carregado. Substitua INSIRA SEU TOKEN pelo seu token real:
+Abra o arquivo .env no editor de texto de sua escolha. No arquivo, você verá uma linha onde o token do bot é carregado. Substitua INSIRA SEU TOKEN AQUI MANTENDO AS ASPAS pelo seu token real:
 
 ```bash
-bot.run("INSIRA SEU TOKEN")
+DISCORD_TOKEN="INSIRA SEU TOKEN AQUI MANTENDO AS ASPAS"
 ```
 
 ### 6. Execute o Bot
