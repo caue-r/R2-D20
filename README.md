@@ -1,6 +1,6 @@
 # R2-D20 Discord Bot
 
-R2-D20 é um bot para **Discord** desenvolvido para auxiliar em jogos de RPG, principalmente para rolagem de dados de iniciativa. Ele permite registrar iniciativas dos jogadores e organizá-las de forma prática, respeitando regras como desvantagem, vantagem e rolagens normais.
+R2-D20 é um bot para **Discord** desenvolvido para auxiliar em jogos de RPG, principalmente para rolagem de dados de iniciativa e rolagens diversas. Ele permite registrar iniciativas dos jogadores e realizar rolagens de dados customizadas, respeitando regras como desvantagem, vantagem, rolagens normais e rolagens críticas.
 
 ## Funcionalidades
 
@@ -12,6 +12,16 @@ R2-D20 é um bot para **Discord** desenvolvido para auxiliar em jogos de RPG, pr
 
 - **!stop**: Encerra o registro das iniciativas e exibe a lista de resultados organizados em ordem decrescente.
 
+- **!roll**: Realiza rolagens de dados customizadas.
+  - Formatos aceitos:
+    - `xdy`: Rola X dados de Y lados e soma os resultados (ex: `3d6`).
+    - `xdy+z`: Rola X dados de Y lados e soma com o modificador Z (ex: `1d20+3`).
+    - `x#dy`: Rola X dados de Y lados e exibe cada resultado separadamente (ex: `3#d20`).
+  - Recursos adicionais:
+    - Em rolagens de 1d20, se o resultado for 1, o bot exibe uma mensagem de **Falha Crítica** com caixa vermelha.
+    - Se o resultado for 20, o bot exibe uma mensagem de **Sucesso Crítico** com caixa verde.
+    - Outros resultados aparecem em uma caixa azul.
+
 ## Como Usar
 
 1. Adicione o bot ao seu servidor Discord.
@@ -22,7 +32,8 @@ R2-D20 é um bot para **Discord** desenvolvido para auxiliar em jogos de RPG, pr
    - `V+X nome_do_personagem` (Vantagem)
    - `i+X nome_do_personagem` (Rolagem normal)
 
-4. Quando todos os jogadores enviarem suas iniciativas, use o comando `!stop` para ver a lista organizada.
+4. Para rolar dados personalizados, use o comando `!roll` conforme os exemplos.
+5. Quando todos os jogadores enviarem suas iniciativas, use o comando `!stop` para ver a lista organizada.
 
 ## Pré-requisitos
 
@@ -44,10 +55,10 @@ Após o download, extraia o conteúdo em uma pasta de sua escolha.
 No terminal, dentro da pasta onde você extraiu o conteúdo, crie um ambiente virtual:
 
 ```bash
-python -m venv venv 
+python -m venv venv
 ```
 
-### 3. Ative o Ambiente Virutal
+### 3. Ative o Ambiente Virtual
 
 ```bash
 .\venv\Scripts\activate
@@ -81,8 +92,3 @@ python bot.py
 ### Disclaimer
 
 O R2-D20 não coleta nenhuma informação pessoal dos usuários e não está relacionado oficialmente ao Discord ou qualquer sistema de RPG específico. Ele é um projeto de código aberto para fins de entretenimento e aprimoramento da experiência de jogo.
-
-
-
-
-
