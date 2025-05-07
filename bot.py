@@ -6,7 +6,6 @@ from discord.ext import commands
 import random
 import re
 
-
 intents = discord.Intents.default()
 intents.message_content = True
 
@@ -19,7 +18,7 @@ iniciativas = []
 async def on_ready():
     print(f'{bot.user.name} está online!')
 
-# Comando de ajuda personalizada
+# Comando de ajuda
 @bot.command(name='ajuda')
 async def ajuda(ctx):
     embed = discord.Embed(
@@ -33,6 +32,11 @@ async def ajuda(ctx):
         inline=False
     )
     embed.add_field(
+        name="!roll",
+        value="Rola dados no formato `xdy`, exemplo: `3d6`, `1d20+3` ou `2#d20`. Para rolar sem somar, use `x#dy`.",
+        inline=False
+    )
+    embed.add_field(
         name="!stop",
         value="Para de escutar e mostra a tabela de iniciativas registradas.",
         inline=False
@@ -42,6 +46,52 @@ async def ajuda(ctx):
         value="Mostra esta mensagem de ajuda.",
         inline=False
     )
+
+    await ctx.send(embed=embed)
+
+# Rolagem de dados
+@bot.command(name='roll')
+async def rolar_dados(ctx, *, dados: str):
+    padrao = r'^(\d+)(#)?d(\d+)([+-]\d+)?$'
+    match = re.match(padrao, dados)
+    if not match:
+        await ctx.send("Formato inválido! Use xdy, xdy+z ou x#dy, exemplo: 2d6, 1d20+3 ou 3#d20.")
+        return
+
+    quantidade, separar, lados, modificador = match.groups()
+    quantidade = int(quantidade)
+    lados = int(lados)
+    modificador = int(modificador) if modificador else 0
+    resultados = [random.randint(1, lados) for _ in range(quantidade)]
+    soma = sum(resultados) + modificador
+
+    # Configuração de cor e mensagem para rolagens críticas
+    cor = discord.Color.blue()
+    mensagem_critica = ""
+    if lados == 20 and quantidade == 1:
+        if resultados[0] == 1:
+            cor = discord.Color.red()
+            mensagem_critica = "💥 Falha Crítica!"
+        elif resultados[0] == 20:
+            cor = discord.Color.green()
+            mensagem_critica = "✨ Sucesso Crítico!"
+
+    embed = discord.Embed(
+        title=f"🎲 Rolagem de {dados}",
+        color=cor
+    )
+
+    if separar:
+        for i, resultado in enumerate(resultados):
+            embed.add_field(name=f"Rolagem {i+1}", value=f"`[{resultado}] d{lados}`", inline=False)
+    else:
+        resultados_str = " | ".join([f"`[{r}] d{lados}`" for r in resultados])
+        embed.add_field(name="Resultados", value=resultados_str, inline=False)
+        if modificador != 0:
+            embed.add_field(name="Modificador", value=f"{modificador:+}", inline=False)
+        embed.add_field(name="Soma", value=f"**{soma}**", inline=False)
+        if mensagem_critica:
+            embed.add_field(name="Mensagem", value=mensagem_critica, inline=False)
 
     await ctx.send(embed=embed)
 
@@ -104,6 +154,5 @@ async def on_message(message):
     total = mantido + modificador
     iniciativas.append({'nome': nome, 'valor': total, 'detalhes': detalhes})
     await message.channel.send(f"🎲 {nome} registrou iniciativa: `{detalhes}` = **{total}**")
-
 
 bot.run(os.getenv("DISCORD_TOKEN"))
