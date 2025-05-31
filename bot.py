@@ -86,6 +86,9 @@ async def rolar_dados(ctx, *, dados: str):
             embed.add_field(name=f"Rolagem {i+1}", value=f"`[{resultado}] d{lados}`", inline=False)
     else:
         resultados_str = " | ".join([f"`[{r}] d{lados}`" for r in resultados])
+        if len(resultados_str) > 1024:
+            await ctx.send("🚫 O número de dados rolados excede o limite suportado pelo Discord. Tente rolar menos dados.")
+            return
         embed.add_field(name="Resultados", value=resultados_str, inline=False)
         if modificador != 0:
             embed.add_field(name="Modificador", value=f"{modificador:+}", inline=False)
