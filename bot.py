@@ -51,7 +51,7 @@ async def ajuda(ctx):
 
 # Rolagem de dados
 @bot.command(name='roll')
-async def rolar_dados(ctx, *, dados: str):
+async def rolar_dados(ctx, *, dados: str):   
     padrao = r'^(\d+)(#)?d(\d+)([+-]\d+)?$'
     match = re.match(padrao, dados)
     if not match:
@@ -82,8 +82,12 @@ async def rolar_dados(ctx, *, dados: str):
     )
 
     if separar:
+        if quantidade > 25:
+            await ctx.send("🚫 O número máximo de dados exibidos separadamente é 25. Tente usar `xdy` para somar os resultados ou rolar menos dados.")
+            return
         for i, resultado in enumerate(resultados):
             embed.add_field(name=f"Rolagem {i+1}", value=f"`[{resultado}] d{lados}`", inline=False)
+
     else:
         resultados_str = " | ".join([f"`[{r}] d{lados}`" for r in resultados])
         if len(resultados_str) > 1024:
