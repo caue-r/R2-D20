@@ -1,89 +1,90 @@
 # R2-D20 Discord Bot
 
-R2-D20 é um bot para **Discord** desenvolvido para auxiliar em jogos de RPG, principalmente para rolagem de dados de iniciativa e rolagens diversas. Ele permite registrar iniciativas dos jogadores e realizar rolagens de dados customizadas, respeitando regras como desvantagem, vantagem, rolagens normais e rolagens críticas.
+R2-D20 is a **Discord** bot developed to assist in RPG games, mainly for initiative rolls and various dice rolls. It allows you to register player initiatives and perform custom dice rolls, following rules such as disadvantage, advantage, normal rolls, and critical rolls.
 
-## Funcionalidades
+## Features
 
-- **!iniciativa**: Inicia a escuta de mensagens de iniciativa no chat.
-  - Registra iniciativas no formato `D+X nome_do_personagem`, `V+X nome_do_personagem` ou `i+X nome_do_personagem`.
-  - X é o bônus (ou penalidade) a ser somado ou subtraído da rolagem.
-  - `D` e `V` indicam desvantagem e vantagem, respectivamente.
-  - `i` indica uma rolagem simples de dado.
+- **!iniciativa**: Starts listening for initiative messages in the chat.  
+  - Registers initiatives in the format `D+X character_name`, `V+X character_name`, or `i+X character_name`.  
+  - X is the bonus (or penalty) to be added or subtracted from the roll.  
+  - `D` and `V` indicate disadvantage and advantage, respectively.  
+  - `i` indicates a simple dice roll.  
 
-- **!stop**: Encerra o registro das iniciativas e exibe a lista de resultados organizados em ordem decrescente.
+- **!stop**: Ends the initiative registration and displays the list of results sorted in descending order.  
 
-- **!roll**: Realiza rolagens de dados customizadas.
-  - Formatos aceitos:
-    - `xdy`: Rola X dados de Y lados e soma os resultados (ex: `3d6`).
-    - `xdy+z`: Rola X dados de Y lados e soma com o modificador Z (ex: `1d20+3`).
-    - `x#dy`: Rola X dados de Y lados e exibe cada resultado separadamente (ex: `3#d20`).
-  - Recursos adicionais:
-    - Em rolagens de 1d20, se o resultado for 1, o bot exibe uma mensagem de **Falha Crítica** com caixa vermelha.
-    - Se o resultado for 20, o bot exibe uma mensagem de **Sucesso Crítico** com caixa verde.
-    - Outros resultados aparecem em uma caixa azul.
+- **!roll**: Performs custom dice rolls.  
+  - Accepted formats:  
+    - `xdy`: Rolls X dice with Y sides and sums the results (e.g., `3d6`).  
+    - `xdy+z`: Rolls X dice with Y sides and adds modifier Z (e.g., `1d20+3`).  
+    - `x#dy`: Rolls X dice with Y sides and displays each result separately (e.g., `3#d20`).  
+  - Additional features:  
+    - On `1d20` rolls, if the result is 1, the bot shows a **Critical Failure** message with a red box.  
+    - If the result is 20, the bot shows a **Critical Success** message with a green box.  
+    - Other results appear in a blue box.  
 
-## Como Usar
+## How to Use
 
-1. Adicione o bot ao seu servidor Discord.
-2. Use o comando `!iniciativa` para começar a registrar as iniciativas.
-3. Os jogadores devem enviar suas iniciativas no formato:
+1. Add the bot to your Discord server.  
+2. Use the `!iniciativa` command to start registering initiatives.  
+3. Players must send their initiatives in the format:  
 
-   - `D+X nome_do_personagem` (Desvantagem)
-   - `V+X nome_do_personagem` (Vantagem)
-   - `i+X nome_do_personagem` (Rolagem normal)
+   - `D+X character_name` (Disadvantage)  
+   - `V+X character_name` (Advantage)  
+   - `i+X character_name` (Normal roll)  
 
-4. Para rolar dados personalizados, use o comando `!roll` conforme os exemplos.
-5. Quando todos os jogadores enviarem suas iniciativas, use o comando `!stop` para ver a lista organizada.
+4. To roll custom dice, use the `!roll` command as shown in the examples.  
+5. When all players have sent their initiatives, use the `!stop` command to see the organized list.  
 
-## Pré-requisitos
+## Requirements
 
-Para rodar o bot localmente, você precisará:
+To run the bot locally, you will need:  
 
-- **Python 3.11** ou superior
-- **discord.py** (para interagir com o Discord API)
+- **Python 3.11** or higher  
+- **discord.py** (to interact with the Discord API)  
 
-## Passos de Instalação (Windows)
+## Installation Steps (Windows)
 
-### 1. Baixe o Repositório
+### 1. Download the Repository
 
-Baixe o repositório diretamente em formato ZIP clicando no botão **Code** na página do GitHub e selecionando **Download ZIP**. [Clique aqui para baixar o arquivo ZIP](https://github.com/caue-r/R2-D20/archive/refs/heads/main.zip).
+Download the repository directly as a ZIP by clicking the **Code** button on the GitHub page and selecting **Download ZIP**. [Click here to download the ZIP file](https://github.com/caue-r/R2-D20/archive/refs/heads/main.zip).  
 
-Após o download, extraia o conteúdo em uma pasta de sua escolha.
+After downloading, extract the contents into a folder of your choice.  
 
-### 2. Crie um Ambiente Virtual
+### 2. Create a Virtual Environment
 
-No terminal, dentro da pasta onde você extraiu o conteúdo, crie um ambiente virtual:
+In the terminal, inside the folder where you extracted the contents, create a virtual environment:  
 
 ```bash
 python -m venv venv
 ```
 
-### 3. Ative o Ambiente Virtual
+### 3. Activate the Virtual Environment
 
 ```bash
-.\venv\Scripts\activate
+.env\Scriptsctivate
 ```
 
-Após a ativação do ambiente virtual, você verá o nome do ambiente virtual entre parênteses no terminal, como:
+After activating the virtual environment, you will see the environment name in parentheses in the terminal, like:  
+
 ```scss
-(venv) C:\caminho\para\o\projeto>
+(venv) C:\path\to\project>
 ```
 
-### 4. Instale as Dependências
+### 4. Install the Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 5. Defina o Token do Bot no Código
+### 5. Set the Bot Token in the Code
 
-Abra o arquivo .env no editor de texto de sua escolha. No arquivo, você verá uma linha onde o token do bot é carregado. Substitua INSIRA SEU TOKEN AQUI MANTENDO AS ASPAS pelo seu token real:
+Open the `.env` file in the text editor of your choice. In the file, you will see a line where the bot token is loaded. Replace INSERT YOUR TOKEN HERE KEEPING THE QUOTES with your real token:  
 
 ```bash
-DISCORD_TOKEN="INSIRA SEU TOKEN AQUI MANTENDO AS ASPAS"
+DISCORD_TOKEN="INSERT YOUR TOKEN HERE KEEPING THE QUOTES"
 ```
 
-### 6. Execute o Bot
+### 6. Run the Bot
 
 ```bash
 python bot.py
@@ -91,4 +92,4 @@ python bot.py
 
 ### Disclaimer
 
-O R2-D20 não coleta nenhuma informação pessoal dos usuários e não está relacionado oficialmente ao Discord ou qualquer sistema de RPG específico. Ele é um projeto de código aberto para fins de entretenimento e aprimoramento da experiência de jogo.
+R2-D20 does not collect any personal user information and is not officially related to Discord or any specific RPG system. It is an open-source project created for entertainment purposes and to enhance the gaming experience.
